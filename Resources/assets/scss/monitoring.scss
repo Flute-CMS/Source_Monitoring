@@ -1,0 +1,276 @@
+.monitoring_card {
+    position: relative;
+    height: 200px;
+    border-radius: $border-radius;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    transition: $transition;
+    border: 1px solid transparent;
+
+    >img {
+        top: 0;
+        left: 0;
+        z-index: -1;
+        opacity: .4;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        transition: $transition;
+    }
+
+    &-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        >div {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &:first-child {
+                font-family: $font-secondary;
+                font-weight: 600;
+                font-size: 20px;
+            }
+
+            &:last-child {
+                font-size: 12px;
+                font-weight: 500;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 5px;
+
+                img {
+                    max-width: 20px;
+                    max-height: 20px;
+                }
+            }
+        }
+    }
+
+    &-footer {
+        &-text {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            >p {
+                font-weight: 500;
+                color: $color-text;
+                font-size: 14px;
+                opacity: .7;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 5px;
+                transition: $transition;
+
+                &:first-child {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $color-primary;
+                    }
+                }
+
+                >i {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        &-progress {
+            margin-top: 5px;
+            overflow: hidden;
+            position: relative;
+            background-color: $color-disabled;
+            width: 100%;
+            height: 6px;
+            border-radius: 10px;
+
+            >div {
+                width: 0%;
+                transition: .7s;
+                position: absolute;
+                height: 100%;
+                left: 0;
+                background-color: $color-primary;
+
+                &.warning {
+                    background-color: $color-warning;
+                }
+
+                &.error {
+                    background-color: $color-error;
+                }
+            }
+        }
+    }
+
+    &-playbtn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        font-size: 25px;
+        color: $color-text;
+        transition: $transition;
+        background-color: $color-white-10;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .arrow {
+            display: none;
+        }
+    }
+
+    &:hover {
+        border: 1px solid $color-primary;
+
+        >img {
+            opacity: .2;
+        }
+
+        .monitoring_card-playbtn {
+            background-color: $color-disabled;
+            color: $color-primary;
+
+            .play {
+                display: none;
+            }
+
+            .arrow {
+                display: block;
+                animation: opacity .4s ease forwards;
+            }
+        }
+    }
+}
+
+.monitoring_overflow {
+    overflow: auto;
+}
+
+.monitoring_table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        tr {
+            th {
+                padding: 20px;
+                background-color: $color-card;
+                border-bottom: 1px solid $color-white-5;
+                text-align: left;
+                font-weight: 400;
+                font-size: 14px;
+
+                &.center {
+                    text-align: center;
+                }
+
+                &:last-child {
+                    border-top-right-radius: $border-radius / 2;
+                }
+
+                &:first-child {
+                    border-top-left-radius: $border-radius / 2;
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            &:nth-child(odd) {
+                background-color: $color-white-5;
+            }
+
+            &:nth-child(even) {
+                background-color: $color-white-3;
+            }
+
+            td {
+                padding: 20px;
+                border-bottom: 1px solid $color-white-3;
+
+                img {
+                    width: 100px;
+                    height: 60px;
+                    object-fit: cover;
+                    border-radius: $border-radius / 2;
+                }
+            }
+        }
+    }
+
+    .map_pin {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+
+        img {
+            width: 35px;
+            height: 35px;
+            object-fit: cover;
+        }
+    }
+
+    .monitoring_ip_port {
+        user-select: all;
+    }
+
+    .monitoring_players {
+        text-align: center;
+        min-width: 150px;
+    }
+
+    .progress {
+        margin-top: 5px;
+        overflow: hidden;
+        position: relative;
+        background-color: $color-white-5;
+        width: 100%;
+        height: 6px;
+        border-radius: 10px;
+
+        >div {
+            width: 0%;
+            transition: .7s;
+            position: absolute;
+            height: 100%;
+            left: 0;
+            background-color: $color-primary;
+
+            &.warning {
+                background-color: $color-warning;
+            }
+
+            &.error {
+                background-color: $color-error;
+            }
+        }
+    }
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
