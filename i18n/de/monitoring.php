@@ -6,6 +6,11 @@ return [
     'server_name' => 'Servername',
     'players' => 'Spieler',
     'connect' => 'Verbinden',
+    'copy_ip' => [
+        'description' => 'IP kopieren',
+        'success' => 'IP kopiert',
+        'error' => 'Fehler beim Kopieren der IP',
+    ],
     'widgets' => [
         'description' => 'Widget-Typ'
     ]

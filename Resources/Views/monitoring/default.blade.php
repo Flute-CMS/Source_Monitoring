@@ -22,7 +22,7 @@
 
                     <div class="monitoring_card-footer">
                         <div class="monitoring_card-footer-text">
-                            <p data-copy="connect {{ $item['ip'] }}:{{ $item['port'] }}">
+                            <p id="{{ $item['id'] }}" onclick="copyIpToClipboard('{{ $item['id'] }}')" data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="top">
                                 <i class="ph ph-copy"></i>
                                 {{ $item['ip'] }}:{{ $item['port'] }}
                             </p>

@@ -1,7 +1,7 @@
 {
     "name": "Monitoring module",
-    "version": "1.0.0",
-    "description": "Provides a game info status of players on each added server",
+    "version": "1.1.0",
+    "description": "Provides a game info status of players on each added server working SOURCE engine",
     "authors": [
         "Flames"
     ],
