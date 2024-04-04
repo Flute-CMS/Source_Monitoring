@@ -98,6 +98,7 @@ class ServersWidget extends AbstractWidget
 
     protected function getServers(): void
     {
+        //TODO load servers workong on SOURCE engine
         $this->servers = rep(Server::class)->findAll();
     }
 }

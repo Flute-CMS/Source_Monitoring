@@ -23,12 +23,13 @@ class ServersMonitorService
 
         $queries = [];
 
-        foreach ($servers as $server) {
+        foreach ($servers as $index => $server) {
             try {
                 $query = new SourceQuery;
                 $query->Connect($server->ip, $server->port);
 
                 $serverResult = $this->processServerQuery($server, $query);
+                $serverResult['id'] = $index;
                 $queries[] = $serverResult;
 
             } catch (\Exception $e) {
