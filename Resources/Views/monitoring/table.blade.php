@@ -45,9 +45,7 @@
             </tbody>
         </table>
     </div>
+    @component(mm('Source_Monitoring', 'Resources/Views/components/info.blade.php'))
+    @endcomponent
 </div>
 
-@push('content')
-    @component(mm('Source-Monitoring', 'Resources/Views/components/info.blade.php'))
-    @endcomponent
-@endpush

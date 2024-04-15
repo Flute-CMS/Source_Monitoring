@@ -8,6 +8,9 @@ use Flute\Core\Support\FluteRequest;
 class ApiInfoController extends AbstractController
 {
     public function getDetailInfo(FluteRequest $request) {
-        return "{'test':'test'}";
+
+        $test = ['test2', 'test2'];
+
+        return $this->json(array_values($test));
     }
 }

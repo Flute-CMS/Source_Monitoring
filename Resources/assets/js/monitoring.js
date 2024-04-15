@@ -25,4 +25,6 @@ function copyIpToClipboard(elementId) {
 
 function showInfoModal(serverId) {
     console.log(serverId);
+    $('.modal-info').addClass('opened');
+    document.body.style.overflow = 'hidden';
 }

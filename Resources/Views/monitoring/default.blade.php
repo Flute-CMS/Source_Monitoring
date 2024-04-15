@@ -41,9 +41,6 @@
             </div>
         @endforeach
     </div>
-</div>
-
-@push('content')
-    @component(mm('Source-Monitoring', 'Resources/Views/components/info.blade.php'))
+    @component(mm('Source_Monitoring', 'Resources/Views/components/info.blade.php'))
     @endcomponent
-@endpush
+</div>
