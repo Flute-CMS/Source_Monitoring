@@ -1,6 +1,4 @@
-<?php
-
-return [
+<?php return [
     'our_servers' => 'Our Servers',
     'map' => 'Map',
     'server_name' => 'Server Name',

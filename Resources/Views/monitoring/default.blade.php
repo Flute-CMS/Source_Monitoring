@@ -4,7 +4,7 @@
     <div class="row gx-4 gy-4">
         @foreach ($servers as $item)
             <div class="col-md-4">
-                <div class="monitoring_card">
+                <div class="monitoring_card" onclick="showInfoModal('{{ $item['id'] }}')">
                     <img src="@asset($item['info']['Map_img'])" alt="{{ $info['Map']['HostName'] }}">
 
                     <div class="monitoring_card-content">
@@ -42,3 +42,8 @@
         @endforeach
     </div>
 </div>
+
+@push('content')
+    @component(mm('Monitoring', 'Resources/views/components/info.blade.php'))
+    @endcomponent
+@endpush

@@ -33,6 +33,7 @@ class ServersMonitorService
                 $queries[] = $serverResult;
 
             } catch (\Exception $e) {
+                //TODO server not working - add placeholder
                 // skip
             } finally {
                 $query->Disconnect();
@@ -40,6 +41,8 @@ class ServersMonitorService
         }
 
         cache()->set(self::CACHE_KEY, $queries, is_performance() ? self::CACHE_PERFORMANCE_TIME : self::CACHE_DEFAULT_TIME);
+
+        dd($queries);
 
         return $queries;
     }

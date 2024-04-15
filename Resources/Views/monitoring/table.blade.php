@@ -46,3 +46,8 @@
         </table>
     </div>
 </div>
+
+@push('content')
+    @component(mm('Monitoring', 'Resources/views/components/info.blade.php'))
+    @endcomponent
+@endpush
