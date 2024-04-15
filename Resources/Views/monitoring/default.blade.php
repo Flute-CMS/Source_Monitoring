@@ -44,6 +44,6 @@
 </div>
 
 @push('content')
-    @component(mm('Monitoring', 'Resources/views/components/info.blade.php'))
+    @component(mm('Source-Monitoring', 'Resources/Views/components/info.blade.php'))
     @endcomponent
 @endpush

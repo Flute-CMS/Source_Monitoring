@@ -1,11 +1,11 @@
 <?php
 
-namespace Flute\Modules\Monitoring\Widgets;
+namespace Flute\Modules\Source_Monitoring\src\Widgets;
 
 use Flute\Core\Database\Entities\Server;
 use Flute\Core\Database\Entities\WidgetSettings;
 use Flute\Core\Widgets\AbstractWidget;
-use Flute\Modules\Monitoring\Services\ServersMonitorService;
+use Flute\Modules\Source_Monitoring\src\Services\ServersMonitorService;
 use Nette\Utils\Html;
 
 class ServersWidget extends AbstractWidget
@@ -18,15 +18,15 @@ class ServersWidget extends AbstractWidget
     {
         $this->monitorService = app(ServersMonitorService::class);
 
+        $this->setAssets([
+            mm('Source_Monitoring', 'Resources/assets/js/monitoring.js'),
+            mm('Source_Monitoring', 'Resources/assets/scss/monitoring.scss'),
+        ]);
+
         $this->getServers();
 
         if (!$this->servers)
             return;
-
-        $this->setAssets([
-            mm('Monitoring', 'Resources/assets/js/monitoring.js'),
-            mm('Monitoring', 'Resources/assets/scss/monitoring.scss'),
-        ]);
     }
 
     public function render(array $data = []): string
@@ -36,7 +36,7 @@ class ServersWidget extends AbstractWidget
 
         $type = isset ($data['type']) && $data['type'] === 'table' ? 'table' : 'default';
 
-        return render(mm('Monitoring', "Resources/Views/monitoring/{$type}"), [
+        return render(mm('Source_Monitoring', "Resources/Views/monitoring/{$type}"), [
             'servers' => $this->monitorService->monitor($this->servers)
         ]);
     }
@@ -70,7 +70,7 @@ class ServersWidget extends AbstractWidget
 
     public function getName(): string
     {
-        return 'Monitoring widget';
+        return 'Monitoring SOURCE widget';
     }
 
     public function isLazyLoad(): bool

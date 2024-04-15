@@ -1,6 +1,6 @@
 <?php
 
-namespace Flute\Modules\Monitoring\Http\Controllers\Api;
+namespace Flute\Modules\Source_Monitoring\src\Http\Controllers\Api;
 
 use Flute\Core\Support\AbstractController;
 use Flute\Core\Support\FluteRequest;

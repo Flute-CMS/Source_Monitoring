@@ -1,6 +1,6 @@
 <?php
 
-namespace Flute\Modules\Monitoring\Services;
+namespace Flute\Modules\Source_Monitoring\src\Services;
 
 use Flute\Core\Database\Entities\Server;
 use xPaw\SourceQuery\SourceQuery;
@@ -41,8 +41,6 @@ class ServersMonitorService
         }
 
         cache()->set(self::CACHE_KEY, $queries, is_performance() ? self::CACHE_PERFORMANCE_TIME : self::CACHE_DEFAULT_TIME);
-
-        dd($queries);
 
         return $queries;
     }

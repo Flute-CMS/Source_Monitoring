@@ -1,8 +1,8 @@
 <?php
 
-namespace Flute\Modules\Monitoring\ServiceProviders\Extensions;
+namespace Flute\Modules\Source_Monitoring\src\ServiceProviders\Extensions;
 
-use Flute\Modules\Monitoring\Widgets\ServersWidget;
+use Flute\Modules\Source_Monitoring\src\Widgets\ServersWidget;
 use Flute\Core\Contracts\ModuleExtensionInterface;
 
 class WidgetExtension implements ModuleExtensionInterface

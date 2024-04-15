@@ -1,10 +1,10 @@
 <?php
 
-namespace Flute\Modules\Monitoring\ServiceProviders;
+namespace Flute\Modules\Source_Monitoring\src\ServiceProviders;
 
 use Flute\Core\Support\ModuleServiceProvider;
-use Flute\Modules\Monitoring\ServiceProviders\Extensions\WidgetExtension;
-use Flute\Modules\Monitoring\ServiceProviders\Extensions\RoutesExtension;
+use Flute\Modules\Source_Monitoring\src\ServiceProviders\Extensions\WidgetExtension;
+use Flute\Modules\Source_Monitoring\src\ServiceProviders\Extensions\RoutesExtension;
 
 class MonitoringServiceProvider extends ModuleServiceProvider
 {

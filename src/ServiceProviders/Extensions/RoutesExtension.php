@@ -1,9 +1,9 @@
 <?php
 
-namespace Flute\Modules\Monitoring\ServiceProviders\Extensions;
+namespace Flute\Modules\Source_Monitoring\src\ServiceProviders\Extensions;
 
-use Flute\Modules\Monitoring\Widgets\ServersWidget;
-use Flute\Modules\Monitoring\Http\Controllers\Api\ApiInfoController;
+use Flute\Modules\Source_Monitoring\src\Widgets\ServersWidget;
+use Flute\Modules\Source_Monitoring\src\Http\Controllers\Api\ApiInfoController;
 use Flute\Core\Contracts\ModuleExtensionInterface;
 use Flute\Core\Router\RouteGroup;
 
@@ -15,6 +15,6 @@ class RoutesExtension implements ModuleExtensionInterface
             $routeGroup->group(function (RouteGroup $apiRouteGroup) {
                 $apiRouteGroup->get('/info', [ApiInfoController::class, 'getDetailInfo']);
             }, '/api');
-        }, 'monitoring');
+        }, 'source_monitoring');
     }
 }
