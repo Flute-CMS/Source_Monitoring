@@ -4,7 +4,7 @@
     <div class="row gx-4 gy-4">
         @foreach ($servers as $item)
             <div class="col-md-4">
-                <div class="monitoring_card" onclick="showInfoModal('{{ $item['id'] }}')">
+                <div class="monitoring_card">
                     <img src="@asset($item['info']['Map_img'])" alt="{{ $info['Map']['HostName'] }}">
 
                     <div class="monitoring_card-content">
@@ -26,7 +26,7 @@
                                 <i class="ph ph-copy"></i>
                                 {{ $item['ip'] }}:{{ $item['port'] }}
                             </p>
-                            <p>
+                            <p class="monitoring_card-footer-players" onclick="showInfoModal('{{ $item['id'] }}')" data-tooltip="@t('monitoring.open_info')" data-tooltip-conf="top">
                                 <i class="ph ph-users"></i>
                                 {{ $item['info']['Players'] }}/{{ $item['info']['MaxPlayers'] }}
                             </p>

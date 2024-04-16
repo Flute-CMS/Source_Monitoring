@@ -28,3 +28,15 @@ function showInfoModal(serverId) {
     $('.modal-info').addClass('opened');
     document.body.style.overflow = 'hidden';
 }
+
+function closeInfoModal() {
+    console.log("close info");
+    $('.modal-info').removeClass('opened');
+    document.body.style.overflow = '';
+}
+
+$(document).on('click', '.modal-info', function(event) {
+    if ($(event.target).is('.modal-info')) {
+        closeInfoModal();
+    }
+});
