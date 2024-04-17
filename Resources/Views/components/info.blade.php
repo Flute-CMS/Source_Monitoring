@@ -1,10 +1,11 @@
 <div class="modal-info">
     <div class="modal-info-block">
-        <img class="modal-info-bg-img" href="@asset($serverInfo['info']['Map_pin'])"/>
+        <div class="img-bg-container">
+            <img id="img_bg_modal"/>
+        </div>
         <div class="modal-info-block-header">
             <span class="modal-title">@t('monitoring.players')</span>
-            <i class="ph ph-arrow-clockwise" onclick="refreshInfo('{{ $serverInfo['id'] }}')"></i>
-            <div class="separator"></div>
+            <i id="server_0" class="ph ph-arrow-clockwise" onclick="refreshInfoModal()"></i>
             <i class="ph ph-x" onclick="closeInfoModal()"></i>
         </div>
         <div class="modal-info-block-content">

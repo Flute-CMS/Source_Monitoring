@@ -5,13 +5,29 @@
         @foreach ($servers as $item)
             <div class="col-md-4">
                 <div class="monitoring_card">
-                    <img src="@asset($item['info']['Map_img'])" alt="{{ $info['Map']['HostName'] }}">
+                    <img src="@asset($item['info']['Map_img'])" alt="{{ $item['info']['HostName'] }}">
 
                     <div class="monitoring_card-content">
-                        <div>{{ $item['info']['HostName'] }}</div>
+                        <div>
+                            @php
+                                $mapName = __($item['info']['HostName']);
+                            @endphp
+                            @if ($mapName !== $item['info']['HostName'])
+                                {{ $mapName }}
+                            @else
+                                {{ $item['info']['HostName'] }}
+                            @endif
+                        </div>
                         <div>
                             <img src="@asset($item['info']['Map_pin'])">
-                            {{ $item['info']['Map'] }}
+                            @php
+                                $mapTranslation = __($item['info']['Map']);
+                            @endphp
+                            @if ($mapTranslation !== $item['info']['Map'])
+                                {{ $mapTranslation }}
+                            @else
+                                {{ $item['info']['Map'] }}
+                            @endif
                         </div>
                     </div>
 
@@ -22,11 +38,12 @@
 
                     <div class="monitoring_card-footer">
                         <div class="monitoring_card-footer-text">
-                            <p id="{{ $item['id'] }}" onclick="copyIpToClipboard('{{ $item['id'] }}')" data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="top">
+                            <p id="{{ $item['id'] }}" onclick="copyIpToClipboard('{{ $item['id'] }}')" data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="right">
                                 <i class="ph ph-copy"></i>
                                 {{ $item['ip'] }}:{{ $item['port'] }}
                             </p>
-                            <p class="monitoring_card-footer-players" onclick="showInfoModal('{{ $item['id'] }}')" data-tooltip="@t('monitoring.open_info')" data-tooltip-conf="top">
+                            <p class="monitoring_card-footer-players" 
+                                @if($item['info']['Players'] !== '-') onclick="showInfoModal('{{ $item['id'] }}')" data-tooltip="@t('monitoring.open_info')" data-tooltip-conf="left" @endif>
                                 <i class="ph ph-users"></i>
                                 {{ $item['info']['Players'] }}/{{ $item['info']['MaxPlayers'] }}
                             </p>

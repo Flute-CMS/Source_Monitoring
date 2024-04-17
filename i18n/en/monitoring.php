@@ -5,6 +5,7 @@
     "players" => "Players",
     "connect" => "Connect",
     "open_info" => "Detail Info",
+    "no_map" => "No Map",
     "copy_ip" => [
         "description" => "Copy IP",
         "success" => "IP copied",
@@ -15,5 +16,7 @@
     ],
     "info" => [
         "player" => "Player",
+        "server_is_shutdown" => "Not available",
+        "server_not_found" => "Server not found"
     ]
 ];

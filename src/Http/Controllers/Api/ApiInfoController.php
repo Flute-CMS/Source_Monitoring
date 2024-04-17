@@ -4,13 +4,22 @@ namespace Flute\Modules\Source_Monitoring\src\Http\Controllers\Api;
 
 use Flute\Core\Support\AbstractController;
 use Flute\Core\Support\FluteRequest;
+use Flute\Modules\Source_Monitoring\src\Services\ServersMonitorService;
 
 class ApiInfoController extends AbstractController
 {
-    public function getDetailInfo(FluteRequest $request) {
+    public function getDetailInfo(FluteRequest $request, ServersMonitorService $monitorService) {
 
-        $test = ['test2', 'test2'];
+        $serverId = $request->input('server_id', '0');
 
-        return $this->json(array_values($test));
+        $server = $monitorService->findServer($serverId);
+
+        if (empty($server) || $server === null) {
+            return $this->error(__('monitoring.info.server_not_found'), 404);
+        }
+
+        $result = $monitorService->monitorInfo($server[0]);
+
+        return $this->json($result);
     }
 }

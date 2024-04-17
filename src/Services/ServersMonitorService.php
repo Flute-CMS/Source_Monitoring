@@ -8,13 +8,9 @@ use xPaw\SourceQuery\SourceQuery;
 class ServersMonitorService
 {
     protected const CACHE_KEY = 'flute.monitoring.servers';
+    protected const CACHE_KEY_INFO = 'flute.monitoring.servers.info';
     protected const CACHE_PERFORMANCE_TIME = 3600;
-    protected const CACHE_DEFAULT_TIME = 60;
-
-    public function getServers(): array
-    {
-        return rep(Server::class)->findAll();
-    }
+    protected const CACHE_DEFAULT_TIME = 180;
 
     public function monitor(array $servers)
     {
@@ -23,26 +19,66 @@ class ServersMonitorService
 
         $queries = [];
 
-        foreach ($servers as $index => $server) {
-            try {
-                $query = new SourceQuery;
-                $query->Connect($server->ip, $server->port);
-
-                $serverResult = $this->processServerQuery($server, $query);
-                $serverResult['id'] = $index;
-                $queries[] = $serverResult;
-
-            } catch (\Exception $e) {
-                //TODO server not working - add placeholder
-                // skip
-            } finally {
-                $query->Disconnect();
-            }
+        foreach ($servers as $server) {
+            $queries[] = $this->getInfo($server, 0);
         }
 
         cache()->set(self::CACHE_KEY, $queries, is_performance() ? self::CACHE_PERFORMANCE_TIME : self::CACHE_DEFAULT_TIME);
 
         return $queries;
+    }
+
+    public function monitorInfo($server)
+    {
+        //TODO add cache?
+        return $this->getInfo($server, 0);
+    }
+
+    protected function getInfo($server, $tryCount)
+    {
+        $query = null;
+        $serverResult = [];
+    
+        try {
+            $query = new SourceQuery;
+            $query->Connect($server->ip, $server->port);
+            $serverResult = $this->processServerQuery($server, $query);
+        } catch (\Exception $e) {
+            if ($tryCount > 1) {
+                $serverResult = $this->noConnectServer($server);
+            } else {
+                return $this->getInfo($server, $tryCount + 1);
+            }
+        } finally {
+            if ($query !== null) {
+                $query->Disconnect();
+            }
+        }
+    
+        $serverResult['id'] = $server->id;
+    
+        return $serverResult;
+    }
+    
+
+    protected function noConnectServer($server) 
+    {
+        $serverResult = [
+            'id' => $server->id,
+            'ip' => $server->ip,
+            'port' => $server->port,
+        ];
+
+        $serverResult['info']['percentOnline'] = $this->getPercentName(0, 1);
+        $serverResult['info']['Players'] = '-';
+        $serverResult['info']['MaxPlayers'] = '-';
+
+        $serverResult['info']['Map'] = 'monitoring.no_map';
+        $serverResult['info']['Map_img'] = $this->getMapImg($server->mod, '-');
+        $serverResult['info']['Map_pin'] = $this->getMapPin('_');
+        $serverResult['info']['HostName'] = 'monitoring.info.server_is_shutdown';
+
+        return $serverResult;
     }
 
     protected function processServerQuery($server, $query)
@@ -54,6 +90,7 @@ class ServersMonitorService
             'players' => $query->GetPlayers(),
         ];
 
+        $serverResult['info']['HostName'] = $server->name;
         $serverResult['info']['percentOnline'] = $this->getPercentName($serverResult['info']['Players'], $serverResult['info']['MaxPlayers']);
 
         if (isset($serverResult['info']['Map'])) {
@@ -95,5 +132,11 @@ class ServersMonitorService
             return str_replace(BASE_PATH . '/public/', '', $map);
 
         return sprintf('assets/img/maps/%s/-.webp', $mod);
+    }
+
+
+    public function findServer($serverId) 
+    {
+        return rep(Server::class)->select()->where('id', '=', $serverId)->fetchAll();
     }
 }
