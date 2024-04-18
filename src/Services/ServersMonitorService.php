@@ -8,7 +8,6 @@ use xPaw\SourceQuery\SourceQuery;
 class ServersMonitorService
 {
     protected const CACHE_KEY = 'flute.monitoring.servers';
-    protected const CACHE_KEY_INFO = 'flute.monitoring.servers.info';
     protected const CACHE_PERFORMANCE_TIME = 3600;
     protected const CACHE_DEFAULT_TIME = 180;
 
@@ -77,6 +76,7 @@ class ServersMonitorService
         $serverResult['info']['Map_img'] = $this->getMapImg($server->mod, '-');
         $serverResult['info']['Map_pin'] = $this->getMapPin('_');
         $serverResult['info']['HostName'] = 'monitoring.info.server_is_shutdown';
+        $serverResult['info']['HostName_replace'] = $server->name;
 
         return $serverResult;
     }
@@ -90,7 +90,7 @@ class ServersMonitorService
             'players' => $query->GetPlayers(),
         ];
 
-        $serverResult['info']['HostName'] = $server->name;
+        $serverResult['info']['HostName_replace'] = $server->name;
         $serverResult['info']['percentOnline'] = $this->getPercentName($serverResult['info']['Players'], $serverResult['info']['MaxPlayers']);
 
         if (isset($serverResult['info']['Map'])) {

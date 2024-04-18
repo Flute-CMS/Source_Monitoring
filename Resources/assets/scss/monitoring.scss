@@ -354,10 +354,20 @@
 
         &-content {
             padding: 0px 10px 20px 10px;
+
+            >thead {
+                padding: 10px;
+            }
+
+            >tbody {
+                padding: 10px;
+            }
         }
 
         &-footer {
             display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px 25px;
         }
     }

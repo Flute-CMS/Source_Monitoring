@@ -30,23 +30,23 @@ function showInfoModal(serverId) {
     updateInfoModalData(serverId, false);
 }
 
-function refreshInfoModal(serverId) {
-    updateInfoModalData(serverId, true);
-}
-
 function loadingInfo(state) {
     //TODO Skeleton modal loading
     console.log(state);
 }
 
-function updateInfoModalData (serverId, force) {
+function updateInfoModalData(serverId, force) {
+    $('#server_refresh').prop('disabled', true);
     $.ajax({
         url: u('source_monitoring/api/info?server_id=' + serverId + "&force=" + force),
         type: 'GET',
         success: function (response) {
             loadingInfo(false);
-            console.log(response);
+            
             $('#img_bg_modal').attr('src', u(response.info.Map_img));
+            $('#server_refresh').prop('disabled', false).off('click').click(function() {
+                updateInfoModalData(response.id, true);
+            });
         },
         error: function (xhr, status, error) {
 

@@ -10,10 +10,10 @@
                     <div class="monitoring_card-content">
                         <div>
                             @php
-                                $mapName = __($item['info']['HostName']);
+                                $mapTranslation = __($item['info']['Map']);
                             @endphp
-                            @if ($mapName !== $item['info']['HostName'])
-                                {{ $mapName }}
+                            @if ($mapTranslation !== $item['info']['Map'])
+                                {{$item['info']['HostName_replace']}}-{{ __($item['info']['HostName']) }}
                             @else
                                 {{ $item['info']['HostName'] }}
                             @endif
