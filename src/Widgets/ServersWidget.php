@@ -6,12 +6,14 @@ use Flute\Core\Database\Entities\Server;
 use Flute\Core\Database\Entities\WidgetSettings;
 use Flute\Core\Widgets\AbstractWidget;
 use Flute\Modules\Source_Monitoring\src\Services\ServersMonitorService;
+use Spiral\Database\Injection\Parameter;
 use Nette\Utils\Html;
 
 class ServersWidget extends AbstractWidget
 {
     protected array $servers = [];
     protected const CACHE_KEY = 'flute.monitoring.servers';
+    protected const SOURCE_GAME_CODE = ['730', '720'];
     protected ServersMonitorService $monitorService;
 
     public function __construct()
@@ -98,7 +100,6 @@ class ServersWidget extends AbstractWidget
 
     protected function getServers(): void
     {
-        //TODO load servers workong on SOURCE engine
-        $this->servers = rep(Server::class)->findAll();
+        $this->servers = rep(Server::class)->select()->where('mod', 'in', new Parameter(self::SOURCE_GAME_CODE))->fetchAll();
     }
 }

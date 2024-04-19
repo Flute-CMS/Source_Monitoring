@@ -43,7 +43,7 @@ class ServersMonitorService
             $query->Connect($server->ip, $server->port);
             $serverResult = $this->processServerQuery($server, $query);
         } catch (\Exception $e) {
-            if ($tryCount > 1) {
+            if ($tryCount > -1) {
                 $serverResult = $this->noConnectServer($server);
             } else {
                 return $this->getInfo($server, $tryCount + 1);

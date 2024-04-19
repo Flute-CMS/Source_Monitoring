@@ -31,8 +31,18 @@ function showInfoModal(serverId) {
 }
 
 function loadingInfo(state) {
-    //TODO Skeleton modal loading
-    console.log(state);
+    if(state) {
+        $('.img_bg_modal').addClass('skeleton');
+
+        $('#table-players').empty();
+        for (let i = 0; i < 5; i++) {
+            let newRow = $('<tr></tr>');
+            newRow.append('<td></td>').addClass('skeleton');
+            $('#table-players').append(newRow);
+        }
+    } else {
+        $('.img_bg_modal').removeClass('skeleton');
+    }
 }
 
 function updateInfoModalData(serverId, force) {
@@ -41,12 +51,34 @@ function updateInfoModalData(serverId, force) {
         url: u('source_monitoring/api/info?server_id=' + serverId + "&force=" + force),
         type: 'GET',
         success: function (response) {
+
+            console.log(response);
+
             loadingInfo(false);
             
             $('#img_bg_modal').attr('src', u(response.info.Map_img));
             $('#server_refresh').prop('disabled', false).off('click').click(function() {
                 updateInfoModalData(response.id, true);
             });
+
+            let players = response.players;
+
+            // Очистка текущего содержимого таблицы перед добавлением новых данных
+            $('#table-players').empty();
+
+            if (players.length > 0) {
+                players.forEach(player => {
+                    let newRow = $('<tr></tr>');
+                    newRow.append($('<td></td>').append($('<i></i>').addClass('ph ph-link')));
+                    newRow.append($('<td></td>').text(player.Name));
+                    newRow.append($('<td></td>').text(player.Frags));
+                    newRow.append($('<td></td>').text(player.TimeF));
+
+                    $('#table-players').append(newRow);
+                });
+            } else {
+                $('#table-players').append($('<tr>').append($('<td>').attr('colspan', '4').text(translate('monitoring.info.no_players'))));
+            }
         },
         error: function (xhr, status, error) {
 

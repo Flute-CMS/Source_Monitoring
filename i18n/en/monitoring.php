@@ -17,6 +17,8 @@
     "info" => [
         "player" => "Player",
         "server_is_shutdown" => "Engineering works",
-        "server_not_found" => "Server not found"
+        "server_not_found" => "Server not found",
+        "score" => "Score",
+        "time" => "Time",
     ]
 ];

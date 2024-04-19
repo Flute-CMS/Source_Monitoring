@@ -14,64 +14,15 @@
                     <tr>
                         <td>
                             <i class="ph ph-user"></i>
+                        </td>
+                        <td>
                             <span>@t('monitoring.info.player')</span>
                         </td>
-                        <td>Knocky</td>
-                        <td>Flor</td>
-                        <td>Ella</td>
-                        <td>Juan</td>
+                        <td>@t('monitoring.info.score')</td>
+                        <td>@t('monitoring.info.time')</td>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Breed</td>
-                        <td>Jack Russell</td>
-                        <td>Poodle</td>
-                        <td>Streetdog</td>
-                        <td>Cocker Spaniel</td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td>Jack Russell</td>
-                        <td>Poodle</td>
-                        <td>Streetdog</td>
-                        <td>Cocker Spaniel</td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td>Jack Russell</td>
-                        <td>Poodle</td>
-                        <td>Streetdog</td>
-                        <td>Cocker Spaniel</td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td>Jack Russell</td>
-                        <td>Poodle</td>
-                        <td>Streetdog</td>
-                        <td>Cocker Spaniel</td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td>Jack Russell</td>
-                        <td>Poodle</td>
-                        <td>Streetdog</td>
-                        <td>Cocker Spaniel</td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td>Jack Russell</td>
-                        <td>Poodle</td>
-                        <td>Streetdog</td>
-                        <td>Cocker Spaniel</td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td>Jack Russell</td>
-                        <td>Poodle</td>
-                        <td>Streetdog</td>
-                        <td>Cocker Spaniel</td>
-                    </tr>
+                <tbody id="table-players">
                 </tbody>
             </table>
         </div>

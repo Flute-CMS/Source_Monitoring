@@ -290,7 +290,7 @@
     &-block {
         background: #101010;
         border-radius: 25px;
-        max-width: 600px;
+        max-width: 500px;
         width: calc(100% - 40px);
         margin: 0 auto;
         overflow: hidden;
@@ -354,13 +354,54 @@
 
         &-content {
             padding: 0px 10px 20px 10px;
+            max-height: 300px;
+            overflow: auto;
 
-            >thead {
-                padding: 10px;
-            }
+            >table {
+                width: 100%;
+                border-collapse: collapse;
+                border-spacing: 0;
 
-            >tbody {
-                padding: 10px;
+                >thead {
+                    
+                    >tr {
+                        margin: 0 10px 10px 0;
+                        padding: 10px;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        background: $color-card;
+
+                        >td {
+                            >span {
+                                width: 100%;
+                                font-weight: 500;
+                                &.center {
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }   
+                }
+
+                >tbody {
+                     >tr {
+                        margin: 0 10px 10px 0;
+                        padding: 10px;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        background: $color-card;
+                        
+                        >td {
+                            >span {
+                                width: 100%;
+                                font-weight: 500;
+                                &.center {
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }   
+                }
             }
         }
 
