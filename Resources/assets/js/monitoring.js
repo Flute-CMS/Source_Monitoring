@@ -16,10 +16,26 @@ function copyIpToClipboard(elementId) {
             message: translate('monitoring.copy_ip.success')
         });
     } catch(error) {
-        toast({
-            type: 'error',
-            message: translate('monitoring.copy_ip.error')
-        });
+        try {
+            var temporaryElement = document.createElement('textarea');
+            temporaryElement.style.position = 'absolute';
+            temporaryElement.style.left = '-9999px';
+            temporaryElement.setAttribute('readonly', '');
+            temporaryElement.value = 'connect ' + elementId;
+            document.body.appendChild(temporaryElement);
+            temporaryElement.select();
+            document.execCommand('copy');
+            document.body.removeChild(temporaryElement);
+            toast({
+                type: 'success',
+                message: translate('monitoring.copy_ip.success')
+            });
+        } catch(error) {
+            toast({
+                type: 'error',
+                message: translate('monitoring.copy_ip.error')
+            });
+        }
     }
 }
 
@@ -32,13 +48,11 @@ function showInfoModal(serverId) {
 
 function loadingInfo(state) {
     if(state) {
-        $('.img_bg_modal').addClass('skeleton');
-
-        $('#table-players').empty();
+        $('#map_name').text('---');
+        $('#table-body-players').empty();
         for (let i = 0; i < 5; i++) {
-            let newRow = $('<tr></tr>');
-            newRow.append('<td></td>').addClass('skeleton');
-            $('#table-players').append(newRow);
+            let newRow = $('<div class="div-table-row skeleton"></div>');
+            $('#table-body-players').append(newRow);
         }
     } else {
         $('.img_bg_modal').removeClass('skeleton');
@@ -57,27 +71,35 @@ function updateInfoModalData(serverId, force) {
             loadingInfo(false);
             
             $('#img_bg_modal').attr('src', u(response.info.Map_img));
+            $('#img_pin').attr('src', u(response.info.Map_pin));
+            $('#map_name').text(response.info.Map);
+
             $('#server_refresh').prop('disabled', false).off('click').click(function() {
                 updateInfoModalData(response.id, true);
             });
 
+            $('#bt_copy_ip').on('click', function() {
+                copyIpToClipboard(response.ip + ':' + response.port);
+            });
+            $('#bt_play').attr('href', 'steam://connect/' + response.ip + ':' + response.port);
+
             let players = response.players;
 
             // Очистка текущего содержимого таблицы перед добавлением новых данных
-            $('#table-players').empty();
+            $('#table-body-players').empty();
 
             if (players.length > 0) {
                 players.forEach(player => {
-                    let newRow = $('<tr></tr>');
-                    newRow.append($('<td></td>').append($('<i></i>').addClass('ph ph-link')));
-                    newRow.append($('<td></td>').text(player.Name));
-                    newRow.append($('<td></td>').text(player.Frags));
-                    newRow.append($('<td></td>').text(player.TimeF));
+                    let row = $('<div class="div-table-row"></div>');
+                    row.append('<div class="div-table-cell"><i class="ph ph-link"></i></div>');
+                    row.append('<div class="div-table-cell"><p>' + player.Name + '</p></div>');
+                    row.append('<div class="div-table-cell"><p>' + player.Frags + '</p></div>');
+                    row.append('<div class="div-table-cell"><p>' + player.TimeF + '</p></div>');
 
-                    $('#table-players').append(newRow);
+                    $('#table-body-players').append(row);
                 });
             } else {
-                $('#table-players').append($('<tr>').append($('<td>').attr('colspan', '4').text(translate('monitoring.info.no_players'))));
+                $('#table-body-players').append('<div class="div-table-row"><div class="div-table-cell" colspan="4">No players found</div></div>');
             }
         },
         error: function (xhr, status, error) {
