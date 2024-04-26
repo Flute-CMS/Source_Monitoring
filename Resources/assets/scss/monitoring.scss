@@ -331,11 +331,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            border-bottom: 1px solid $color-white-5;
-
-            i {
-                font-size: 20px;
-                opacity: .6;
+        
+            i:first-child, i:last-child {
+                flex: 0 0 auto;
+                font-size: 26px;
+                opacity: .5;
+                padding-left: 20px;
+                font-weight: 500;
                 transition: $transition;
                 cursor: pointer;
 
@@ -343,18 +345,23 @@
                     opacity: 1;
                 }
             }
-
+        
             h2 {
+                padding: 0 20px 0 0;
                 font-weight: 500;
                 font-family: $font-secondary;
-                font-size: 23px;
+                font-size: 24px;
+                border-right: 1px solid $color-white-10;
+                flex: 0 0 auto;
             }
-
+        
             .map-pin {
+                margin-left: 20px;
                 display: flex;
                 flex-direction: row;
                 gap: 10px;
                 align-items: center;
+                flex: 2;
         
                 img {
                     width: 35px;
@@ -366,9 +373,12 @@
 
         &-content {
             margin: 0 5px 0 20px;
-            padding: 20px 15px 0 0;
-            max-height: 300px;
+            padding: 10px 15px 5px 0;
+            max-height: 400px;
+            min-height: 400px;
             overflow: auto;
+            border-top: 1px solid $color-white-10;
+            border-bottom: 1px solid $color-white-10;
 
             .div-table {
                 display: flex;
@@ -376,12 +386,11 @@
                 width: 100%;
                 border-collapse: collapse;
             }
+
             .div-table-header {
                 display: flex;
-                background: $color-card;
                 border-radius: 15px;
                 overflow: hidden;
-                margin-bottom: 5px;
             }
 
             .div-table-row {
@@ -392,10 +401,12 @@
                 margin-bottom: 5px;
                 border-radius: 15px;
                 overflow: hidden;
-                opacity: .7;
+                opacity: .6;
+                transition: $transition;
 
                 &:hover {
                     opacity: 1;
+                    color: $color-primary;
                 }
             }
 
@@ -413,57 +424,40 @@
                 justify-content: center; 
 
                 i {
+                    font-size: 22px;
                     text-align: center;
                 }
 
                 p {
+                    max-width: 150px;
                     text-align: start;
                     flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
+            }
+
+            .div-table-row .div-table-cell:nth-last-child(1) p,
+            .div-table-row .div-table-cell:nth-last-child(2) p {
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                max-width: none;
+                width: 100%;
             }
         }
 
         &-footer {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
             padding: 20px;
-            border-top: 1px solid $color-white-5;
-
-            .copy-ip {
-                background-color: #000;
-                border: 1px dashed $color-white-5;
-                border-radius: 20px;
-                color: white;
-                padding: 10px 20px;
-                font-size: 16px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-
-                &:hover {
-                    background-color: #333;
-                }
-              }
-              
-              .play-btn {
-                background-color: #8bc34a; /* Green color for the play button */
-                border-radius: 20px; /* This creates rounded corners */
-                color: white;
-                padding: 10px 20px;
-                font-size: 16px;
-                text-align: center;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: background-color 0.3s;
-
-                &:hover {
-                    background-color: #4CAF50;
-                }
-              }
+            gap: 20px;
+        
+            .info-action {
+                flex-grow: 1;
+            }
         }
     }
 

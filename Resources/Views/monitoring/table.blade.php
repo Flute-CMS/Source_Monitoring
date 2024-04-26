@@ -26,7 +26,7 @@
                             </div>
                         </td>
                         <td class="monitoring_ip_port" onclick="copyIpToClipboard('{{ $item['id'] }}')" data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="right">{{ $item['ip'] }}:{{ $item['port'] }}</td>
-                        <td class="monitoring_players" onclick="showInfoModal('{{ $item['id'] }}')" data-tooltip="@t('monitoring.open_info')" data-tooltip-conf="left">
+                        <td class="monitoring_players" @if($item['info']['Players'] !== '-') onclick="showInfoModal('{{ $item['id'] }}')" data-tooltip="@t('monitoring.open_info')" data-tooltip-conf="left" @endif>
                             {{ $item['info']['Players'] }}/{{ $item['info']['MaxPlayers'] }}
                             <div class="progress">
                                 <div style="width: {{ $item['info']['percentOnline']['percent'] }}%"

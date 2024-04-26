@@ -48,19 +48,19 @@ function showInfoModal(serverId) {
 
 function loadingInfo(state) {
     if(state) {
-        $('#map_name').text('---');
+        $('#map_name').text('-----');
         $('#table-body-players').empty();
         for (let i = 0; i < 5; i++) {
             let newRow = $('<div class="div-table-row skeleton"></div>');
             $('#table-body-players').append(newRow);
         }
     } else {
-        $('.img_bg_modal').removeClass('skeleton');
+        //TODO seleton to image bg
+        $('.img-bg-container').removeClass('skeleton');
     }
 }
 
 function updateInfoModalData(serverId, force) {
-    $('#server_refresh').prop('disabled', true);
     $.ajax({
         url: u('source_monitoring/api/info?server_id=' + serverId + "&force=" + force),
         type: 'GET',

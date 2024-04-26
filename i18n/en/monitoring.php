@@ -15,7 +15,10 @@
         "description" => "Widget Type"
     ],
     "info" => [
+        "play" => "Play",
         "player" => "Player",
+        "close" => "Close",
+        "refresh" => "Refresh",
         "server_is_shutdown" => "Engineering works",
         "server_not_found" => "Server not found",
         "score" => "Score",

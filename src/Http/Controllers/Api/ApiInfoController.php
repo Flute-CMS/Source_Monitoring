@@ -11,6 +11,7 @@ class ApiInfoController extends AbstractController
     public function getDetailInfo(FluteRequest $request, ServersMonitorService $monitorService) {
 
         $serverId = $request->input('server_id', '0');
+        $force = $request->input('force', false);
 
         $server = $monitorService->findServer($serverId);
 
@@ -18,7 +19,7 @@ class ApiInfoController extends AbstractController
             return $this->error(__('monitoring.info.server_not_found'), 404);
         }
 
-        $result = $monitorService->monitorInfo($server[0]);
+        $result = $monitorService->monitorInfo($server[0], $force);
 
         return $this->json($result);
     }

@@ -1,15 +1,27 @@
 <?php return [
-    "our_servers" => "Наши серверы",
+    "our_servers" => "Наши Серверы",
     "map" => "Карта",
-    "server_name" => "Название сервера",
+    "server_name" => "Имя Сервера",
     "players" => "Игроки",
-    "connect" => "Войти",
+    "connect" => "Подключиться",
+    "open_info" => "Подробная Информация",
+    "no_map" => "Без Карты",
     "copy_ip" => [
         "description" => "Скопировать IP",
         "success" => "IP скопирован",
-        "error" => "Ошибка при копировании IP",
+        "error" => "Ошибка копирования IP",
     ],
     "widgets" => [
-        "description" => "Тип отображения"
+        "description" => "Тип Виджета"
+    ],
+    "info" => [
+        "play" => "Играть",
+        "player" => "Игрок",
+        "close" => "Закрыть",
+        "refresh" => "Обновить",
+        "server_is_shutdown" => "Технические работы",
+        "server_not_found" => "Сервер не найден",
+        "score" => "Счет",
+        "time" => "Время",
     ]
 ];

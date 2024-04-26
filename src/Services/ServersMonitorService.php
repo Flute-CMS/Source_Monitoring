@@ -10,6 +10,8 @@ class ServersMonitorService
     protected const CACHE_KEY = 'flute.monitoring.servers';
     protected const CACHE_PERFORMANCE_TIME = 3600;
     protected const CACHE_DEFAULT_TIME = 180;
+    protected const CACHE_PERFORMANCE_TIME_DETAIL = 60;
+    protected const CACHE_DEFAULT_TIME_DETAIL = 30;
 
     public function monitor(array $servers)
     {
@@ -27,10 +29,29 @@ class ServersMonitorService
         return $queries;
     }
 
-    public function monitorInfo($server)
+    public function monitorInfo($server, $force)
     {
-        //TODO add cache?
-        return $this->getInfo($server, 0);
+        $cacheKey = self::CACHE_KEY . '.' . $server->id;
+        $cacheTime = is_performance() ? self::CACHE_PERFORMANCE_TIME_DETAIL : self::CACHE_DEFAULT_TIME_DETAIL;
+        $lastQueryTimeKey = $cacheKey . '.last_query_time';
+
+        $lastQueryTime = cache()->get($lastQueryTimeKey, 0);
+        $currentTime = time();
+
+        if ($force && ($currentTime - $lastQueryTime >= 10)) {
+            $result = $this->getInfo($server, 0);
+            cache()->set($cacheKey, $result, $cacheTime);
+            cache()->set($lastQueryTimeKey, $currentTime, $cacheTime);
+        } else {
+            $result = cache()->get($cacheKey);
+            if (!$result) {
+                $result = $this->getInfo($server, 0);
+                cache()->set($cacheKey, $result, $cacheTime);
+                cache()->set($lastQueryTimeKey, $currentTime, $cacheTime);
+            }
+        }
+
+        return $result;
     }
 
     protected function getInfo($server, $tryCount)
