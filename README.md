@@ -1,4 +1,4 @@
-# Monitoring Module for Flute CMS
+# Monitoring Module for Flute CMS (Source Games)
 
 ## Overview
 The Monitoring Module for [Flute CMS](https://github.com/Flute-CMS/cms) is designed to display server information directly on your website. Utilizing the SourceQuery library, it supports a wide range of games and provides real-time server details.
