@@ -1,9 +1,9 @@
 <?php
 
-namespace Flute\Modules\Monitoring;
+namespace Flute\Modules\Source_Monitoring;
 
 use Flute\Core\Support\AbstractModuleInstaller;
-use Flute\Modules\Monitoring\Widgets\ServersWidget;
+use Flute\Modules\Source_Monitoring\src\Widgets\ServersWidget;
 
 class Installer extends AbstractModuleInstaller
 {

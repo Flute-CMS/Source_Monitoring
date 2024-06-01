@@ -17,16 +17,20 @@
             <tbody>
                 @foreach ($servers as $item)
                     <tr>
-                        <td><img src="@asset($item['info']['Map_img'])" alt="{{ $item['info']['HostName'] }}"></td>
-                        <td>{{ $item['info']['HostName'] }}</td>
+                        <td><img src="@asset($item['info']['Map_img'])" alt="{{ $item['serverName'] }}"></td>
+                        <td>{{ $item['serverName'] }}</td>
                         <td>
                             <div class="map_pin">
                                 <img src="@asset($item['info']['Map_pin'])">
                                 {{ $item['info']['Map'] }}
                             </div>
                         </td>
-                        <td class="monitoring_ip_port">{{ $item['ip'] }}:{{ $item['port'] }}</td>
-                        <td class="monitoring_players">
+                        <td class="monitoring_ip_port" data-copy="{{ $item['ip'] }}:{{ $item['port'] }}"
+                            data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="right">
+                            {{ $item['displayIp'] }}
+                        </td>
+                        <td class="monitoring_players"
+                            @if ($item['info']['Players'] !== '-') onclick="showInfoModal('{{ $item['id'] }}')" data-tooltip="@t('monitoring.open_info')" data-tooltip-conf="left" @endif>
                             {{ $item['info']['Players'] }}/{{ $item['info']['MaxPlayers'] }}
                             <div class="progress">
                                 <div style="width: {{ $item['info']['percentOnline']['percent'] }}%"
@@ -45,4 +49,6 @@
             </tbody>
         </table>
     </div>
+    @component(mm('Source_Monitoring', 'Resources/Views/components/info.blade.php'))
+    @endcomponent
 </div>

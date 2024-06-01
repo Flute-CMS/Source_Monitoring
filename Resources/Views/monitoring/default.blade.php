@@ -5,13 +5,23 @@
         @foreach ($servers as $item)
             <div class="col-md-4">
                 <div class="monitoring_card">
-                    <img src="@asset($item['info']['Map_img'])" alt="{{ $info['Map']['HostName'] }}">
+                    <img src="@asset($item['info']['Map_img'])" alt="{{ $item['serverName'] }}">
 
                     <div class="monitoring_card-content">
-                        <div>{{ $item['info']['HostName'] }}</div>
+                        <div>
+                            @if ($item['status'] === 'offline')
+                                @t('monitoring.info.server_is_shutdown')
+                            @else
+                                {{ $item['serverName'] }}
+                            @endif
+                        </div>
                         <div>
                             <img src="@asset($item['info']['Map_pin'])">
-                            {{ $item['info']['Map'] }}
+                            @if (__($item['info']['Map']) !== $item['info']['Map'])
+                                {{ __($item['info']['Map']) }}
+                            @else
+                                {{ $item['info']['Map'] }}
+                            @endif
                         </div>
                     </div>
 
@@ -22,11 +32,13 @@
 
                     <div class="monitoring_card-footer">
                         <div class="monitoring_card-footer-text">
-                            <p id="{{ $item['id'] }}" onclick="copyIpToClipboard('{{ $item['id'] }}')" data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="top">
+                            <p id="{{ $item['id'] }}" data-copy="{{ $item['ip'] }}:{{ $item['port'] }}"
+                                data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="right">
                                 <i class="ph ph-copy"></i>
-                                {{ $item['ip'] }}:{{ $item['port'] }}
+                                {{ $item['displayIp'] }}
                             </p>
-                            <p>
+                            <p class="monitoring_card-footer-players"
+                                @if ($item['info']['Players'] !== '-') onclick="showInfoModal('{{ $item['id'] }}')" data-tooltip="@t('monitoring.open_info')" data-tooltip-conf="left" @endif>
                                 <i class="ph ph-users"></i>
                                 {{ $item['info']['Players'] }}/{{ $item['info']['MaxPlayers'] }}
                             </p>
@@ -41,4 +53,6 @@
             </div>
         @endforeach
     </div>
+    @component(mm('Source_Monitoring', 'Resources/Views/components/info.blade.php'))
+    @endcomponent
 </div>
