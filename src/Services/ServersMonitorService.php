@@ -90,7 +90,7 @@ class ServersMonitorService
 
         try {
             $query = new SourceQuery;
-            $query->Connect($server->ip, $server->port, 3, ((int) $server->mod === 10) ? SourceQuery::GOLDSOURCE : SourceQuery::SOURCE);
+            $query->Connect($server->ip, $server->port, 5, ((int) $server->mod === 10) ? SourceQuery::GOLDSOURCE : SourceQuery::SOURCE);
             $serverResult = $this->processServerQuery($server, $query);
         } catch (\Exception $e) {
             if ($wasTried) {

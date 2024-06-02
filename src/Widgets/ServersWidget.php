@@ -125,6 +125,6 @@ class ServersWidget extends AbstractWidget
 
     protected function getServers(): void
     {
-        $this->servers = rep(Server::class)->select()->where('mod', 'in', new Parameter(self::SOURCE_GAME_CODE))->fetchAll();
+        $this->servers = rep(Server::class)->select()->where('mod', 'in', new Parameter(self::SOURCE_GAME_CODE))->where('enabled', true)->fetchAll();
     }
 }
