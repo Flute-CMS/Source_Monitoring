@@ -25,7 +25,7 @@
                                 {{ $item['info']['Map'] }}
                             </div>
                         </td>
-                        <td class="monitoring_ip_port" data-copy="{{ $item['displayIp'] }}"
+                        <td class="monitoring_ip_port" data-copy="{{ $item['ip'] }}:{{ $item['port'] }}"
                             data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="right">
                             {{ $item['displayIp'] }}
                         </td>
@@ -39,7 +39,7 @@
                         </td>
                         <td>
                             <a class="btn btn--with-icon size-s outline"
-                                href="steam://connect/{{ $item['displayIp'] }}">
+                                href="steam://connect/{{ $item['ip'] }}:{{ $item['port'] }}">
                                 @t('monitoring.connect')
                                 <span class="btn__icon arrow"><i class="ph ph-arrow-up-right"></i></span>
                             </a>
