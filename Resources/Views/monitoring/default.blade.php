@@ -32,7 +32,7 @@
 
                     <div class="monitoring_card-footer">
                         <div class="monitoring_card-footer-text">
-                            <p id="{{ $item['id'] }}" data-copy="{{ $item['ip'] }}:{{ $item['port'] }}"
+                            <p id="{{ $item['id'] }}" data-copy="{{ $item['displayIp'] }}"
                                 data-tooltip="@t('monitoring.copy_ip.description')" data-tooltip-conf="right">
                                 <i class="ph ph-copy"></i>
                                 {{ $item['displayIp'] }}
